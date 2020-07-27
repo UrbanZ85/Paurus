@@ -1,0 +1,152 @@
+<div class="p-grid">
+    <div class="p-col-1"></div>
+    <div class="p-col">
+        <p-table [columns]="cols" [value]="students" selectionMode="single"   [(selection)]="selectedStudent" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="5" [totalRecords]="totalRecords" [loading]="loading">
+            <!-- <p-table [columns]="cols" [value]="students" selectionMode="single"  (onLazyLoad)="loadCarsLazy($event)" [(selection)]="selectedStudent" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="5" [totalRecords]="totalRecords" [loading]="loading"> -->
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData">
+                    <td *ngFor="let col of columns">
+                        <div *ngIf="col.field!=='courses'">{{rowData[col.field]}}</div>
+                        <div *ngIf="col.field==='courses'">
+                            <div *ngFor="let c of rowData[col.field]">
+                               {{c.name}}
+                            </div>
+                        </div>
+                        <div *ngIf="col.field==='courses2'">
+                            <div *ngFor="let c of rowData[col.field]">
+                               {{c.name}}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+                <ng-template pTemplate="summary" let-rowData *ngIf="!overview">
+                    <div style="text-align:left">
+                        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add"></button>
+                    </div>
+                </ng-template>
+        </p-table>
+    </div>
+    <div class="p-col-1"></div>
+</div>
+
+<!-- <p-dialog header="Student Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{height: '400px', width: '300px'}" >
+    <div class="p-grid ui-fluid" *ngIf="student">
+        <div class="p-col-4">
+            <label for="name">Name</label>
+        </div>
+        <div class="p-col-8">
+            <input pInputText id="name" [(ngModel)]="student.name" autofocus />
+        </div>
+        <div class="p-col-4">
+            <label for="last_name">Last name</label>
+        </div>
+        <div class="p-col-8">
+            <input pInputText id="last_name" [(ngModel)]="student.last_name" />
+        </div>
+        <div class="p-col-4">
+            <label for="birthdate">Birth date</label>
+        </div>
+        <div class="p-col-8">
+            <input pInputText id="birthdate" [(ngModel)]="student.birthdate" />
+        </div>
+        <div class="p-col-4">
+            <label for="studentNr">Student Number</label>
+        </div>
+        <div class="p-col-8">
+            <input pInputText id="studentNr" [(ngModel)]="student.studentNr" />
+        </div>
+        <div class="p-col-4">
+            <label for="corses">Courses</label>
+        </div>
+        <div class="p-col-8">
+                <p-multiSelect [options]="courses" [(ngModel)]="student.courses" [filter]="false" optionLabel="name">
+                    <ng-template let-value pTemplate="selectedItems">
+                        <div *ngFor="let val of value" class="ui-multiselected-item-tokenl ui-corner-all">
+                            <span>{{val.name}}</span>
+                        </div>
+                        <span *ngIf="!value || value.length === 0" class="ui-multiselected-empty-token ui-corner-all">Choose</span>
+                    </ng-template>
+                    <ng-template let-c pTemplate="item">
+                        <div style="font-size:14px;float:right;margin-top:4px">{{c.label}}</div>
+                    </ng-template>
+                </p-multiSelect>
+        </div>
+
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-times" (click)="delete()" label="Delete"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save()" label="Save"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+ -->
+<p-dialog header="Student Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true" appendTo="body" [style]="{ width: '300px'}" >  
+        <form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
+            <div class="p-grid ui-fluid" *ngIf="student">
+            <div class="p-col-4">
+                <label for="name">First Name </label>
+            </div>
+            <div class="p-col-8">
+                <input pInputText id="name" type="text" formControlName="name" placeholder="Required"/>
+                <p-message severity="error" text="Firstname is required" *ngIf="!userform.controls['name'].valid&&userform.controls['name'].dirty"></p-message>
+            </div>
+            <div class="p-col-4">
+                <label for="last_name">Last name</label>
+            </div>
+            <div class="p-col-8">
+                <input pInputText id="last_name" type="text" formControlName="last_name" placeholder="Required"/>
+                <p-message severity="error" text="Lastname is required" *ngIf="!userform.controls['last_name'].valid&&userform.controls['last_name'].dirty"></p-message>
+            </div>
+            <div class="p-col-4">
+                <label for="birthdate">Birth date</label>
+            </div>
+            <div class="p-col-8">
+                <input pInputText id="birthdate" type="text" formControlName="birthdate" placeholder="Required"/>
+                <p-message severity="error" text="Birth day is required" *ngIf="!userform.controls['birthdate'].valid&&userform.controls['birthdate'].dirty"></p-message>
+            </div>
+            <div class="p-col-4">
+                <label for="studentNr">Student Number</label>
+            </div>
+            <div class="p-col-8">
+            
+                <input pInputText id="studentNr" type="text" formControlName="studentNr" placeholder="Required"/>
+                <p-message severity="error" text="Student number is required" *ngIf="!userform.controls['studentNr'].valid&&userform.controls['studentNr'].dirty"></p-message>
+            </div>
+            <div class="p-col-4">
+                <label for="corses">Courses</label>
+            </div>
+            <div class="p-col-8">
+                <p-multiSelect [options]="courses" [(ngModel)]="student.courses" formControlName="courses" [filter]="true" optionLabel="name">
+                    <ng-template let-value pTemplate="selectedItems">
+                        <div *ngFor="let val of value" class="ui-multiselected-item-tokenl ui-corner-all">
+                            <span>{{val.name}}</span>
+                        </div>
+                        <span *ngIf="!value || value.length === 0" class="ui-multiselected-empty-token ui-corner-all">Choose</span>
+                    </ng-template>
+                    <ng-template let-c pTemplate="item">
+                        <div style="font-size:14px;float:right;margin-top:4px">{{c.label}}</div>
+                    </ng-template>
+                </p-multiSelect>
+            </div>
+        </div>
+    </form>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-times" (click)="delete()" label="Delete"></button>
+            <button type="button" type="submit" pButton icon="pi pi-check" (click)="save()" label="Save" [disabled]="!userform.valid"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+
+    

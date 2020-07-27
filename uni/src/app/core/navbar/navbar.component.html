@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <ul ngbNav  class="nav-tabs">
+      <li ngbNavItem>
+        <a ngbNavLink routerLink="">Home</a>
+      </li>
+      <li ngbNavItem>
+        <a ngbNavLink routerLink="overview">Overview</a>
+      </li>
+      <li ngbNavItem>
+        <a ngbNavLink routerLink="students">Students</a>
+    
+      </li>
+      <li ngbNavItem>
+        <a ngbNavLink routerLink="profesors">Profesors</a>
+      </li>
+      <li ngbNavItem>
+        <a ngbNavLink routerLink="courses">Courses</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-right">
+      <li class="navbar-right padding"><a  routerLink="auth" *ngIf="!loggedIn">Login</a>
+      <li class="navbar-right"><a  (click)="logOut($event)" *ngIf="loggedIn">Logout</a></li>
+    </ul>
+  </div>
+</nav>
