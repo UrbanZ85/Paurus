@@ -11,6 +11,7 @@ import { StudentService } from 'src/app/services/student.service';
 import { CoursesService } from 'src/app/services/course.service';
 import {Courses} from '../../models/courses';
 import { GetNewIdService } from 'src/app/services/get-new-id.service';
+import * as moment from 'moment';
 
 
 import {Validators, FormControl, FormGroup, FormBuilder} from '@angular/forms';
@@ -51,14 +52,15 @@ export class StudentComponent implements OnInit {
 
   ngOnInit() {
     /* this.studSrv.getStudents().then(data => this.students = data); */
-    this.loading = true;
+    /* this.loading = true; */
 
     this.userform = this.fb.group({
       name: new FormControl('', Validators.required),
       last_name: new FormControl('', Validators.required),
       birthdate: new FormControl('', Validators.required),
       studentNr: new FormControl('', Validators.required),
-      courses: new FormControl('')
+      courses: new FormControl(''),
+      fiboId: new FormControl(''),
   });
 
     this.cols = [
@@ -80,13 +82,13 @@ export class StudentComponent implements OnInit {
           // tslint:disable-next-line:no-string-literal
           last_name: e.payload.doc.data()['last_name'],
           // tslint:disable-next-line:no-string-literal
-          birthdate: e.payload.doc.data()['birthdate'],
+          birthdate: moment(e.payload.doc.data()['birthdate']).format('DD.MM.YYYY'),
           // tslint:disable-next-line:no-string-literal
           studentNr: e.payload.doc.data()['studentNr'],
           // tslint:disable-next-line:no-string-literal
           courses: e.payload.doc.data()['courses'],
           // tslint:disable-next-line:no-string-literal
-          fiboId: e.payload.doc.data()['fiboId'],
+          fiboId: e.payload.doc.data()['fiboId']
         };
       });
       this.loading = false;
@@ -123,34 +125,40 @@ showDialogToAdd() {
 }
 
 onSubmit(value: string) {
-  console.log('submitted')
+  console.log('submitted');
   this.messageService.add({severity: 'info', summary: 'Success', detail: 'Form Submitted'});
 }
 
-async save() {
-  // this.student = {...this.userform.value};
 
-  let students;
-  // tslint:disable-next-line:prefer-const
-  if (this.students !== undefined) {
-    students = [...this.students];
-  }
+async save() {
+  let tmpCour: Courses[];
+  tmpCour = {...this.student.courses};
+  this.userform.patchValue(tmpCour);
+  this.student = {...this.userform.value};
+
+
+  this.userform.reset();
+  this.displayDialog = false;
 
   if (this.newStudent){
 
       if (this.students !== undefined) {
         this.student.fiboId = await this.getNewId.getNewId();
       }
-      await this.studSrv.createStudent(this.student);
+      this.studSrv.createStudent(this.student);
   }  else {
-    students[this.students.indexOf(this.selectedStudent)] = this.student;
-    this.studSrv.updateStudent(this.student.id, this.student);
+    /* let students;
+    // tslint:disable-next-line:prefer-const
+    if (this.students !== undefined) {
+      students = [...this.students];
+    } */
+
+    /* students[this.students.indexOf(this.selectedStudent)] = this.student; */
+    this.studSrv.updateStudent(this.selectedStudent.id, this.student);
 
   }
-  this.students = students;
-  this.userform.reset();
+  /* this.students = students; */
   this.student = null;
-  this.displayDialog = false;
 }
 
   delete() {

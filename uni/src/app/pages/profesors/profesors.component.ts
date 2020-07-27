@@ -49,7 +49,6 @@ export class ProfesorsComponent implements OnInit {
           courses: e.payload.doc.data()['courses'],
         };
       });
-      console.log(data);
     });
 
     this.courseSubscribe = this.courSrv.getCourses().subscribe(data => {

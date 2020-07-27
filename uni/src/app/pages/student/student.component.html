@@ -1,7 +1,7 @@
 <div class="p-grid">
     <div class="p-col-1"></div>
     <div class="p-col">
-        <p-table [columns]="cols" [value]="students" selectionMode="single"   [(selection)]="selectedStudent" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="5" [totalRecords]="totalRecords" [loading]="loading">
+        <p-table [columns]="cols" [value]="students" selectionMode="single" [(selection)]="selectedStudent" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="20">
             <!-- <p-table [columns]="cols" [value]="students" selectionMode="single"  (onLazyLoad)="loadCarsLazy($event)" [(selection)]="selectedStudent" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="5" [totalRecords]="totalRecords" [loading]="loading"> -->
             <ng-template pTemplate="header" let-columns>
                 <tr>
@@ -90,7 +90,7 @@
     </p-footer>
 </p-dialog>
  -->
-<p-dialog header="Student Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true" appendTo="body" [style]="{ width: '300px'}" >  
+<p-dialog header="Student Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true" appendTo="body" [style]="{ width: '500px'}" >  
         <form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
             <div class="p-grid ui-fluid" *ngIf="student">
             <div class="p-col-4">
@@ -126,7 +126,8 @@
                 <label for="corses">Courses</label>
             </div>
             <div class="p-col-8">
-                <p-multiSelect [options]="courses" [(ngModel)]="student.courses" formControlName="courses" [filter]="true" optionLabel="name">
+                <!-- <p-multiSelect [options]="courses" [(ngModel)]="student.courses" formControlName="courses" [filter]="true" optionLabel="name"> -->
+                    <p-multiSelect [options]="courses"  formControlName="courses" [filter]="true" optionLabel="name">
                     <ng-template let-value pTemplate="selectedItems">
                         <div *ngFor="let val of value" class="ui-multiselected-item-tokenl ui-corner-all">
                             <span>{{val.name}}</span>

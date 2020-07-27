@@ -7,6 +7,5 @@ export interface Student {
     birthdate?: string;
     studentNr?: string;
     courses?: Courses[];
-    courses2?: string[];
     fiboId?: string;
 }

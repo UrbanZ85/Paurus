@@ -7,6 +7,7 @@ import { Student } from '../models/student';
 import { map, catchError, take, exhaustMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthService } from '../core/auth/auth.service';
+import { TestBed } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,23 @@ export class StudentService {
   });
 
   console.log(data); */
-  return this.firestore.collection('Students').add(data);
+  /* console.log('aaa');
+  console.log(data);
+  let test = this.firestore.collection('Students').add(data);
+  console.log(test);
+  console.log('bb');
+  return test; */
+
+  /* console.log('aaa');
+  return new Promise<any>((resolve, reject) => {
+    this.firestore
+        .collection('Students')
+        .add(JSON.stringify(data))
+        .then(res => {console.log('OK'); } , err => reject(console.log(err)))
+        .catch(e => {console.log(e); });
+}); */
+console.log(data);
+this.firestore.collection('Students').add(data);
   }
 
   /* createStudent(data) {
@@ -72,6 +89,7 @@ export class StudentService {
   }
 
   updateStudent(id, data){
+    console.log(data);
     this.firestore.doc('Students/' + id).update(data);
   }
 
@@ -79,9 +97,9 @@ export class StudentService {
     this.firestore.doc('Students/' + id).delete();
   }
 
-  getUsersByCourse(course) {
+  /* getUsersByCourse(course) {
     const data =  this.firestore.collection('Students', ref => ref.where('courses', '==', course));
     // console.log(data.data());
     return data.snapshotChanges();
-  }
+  } */
 }
