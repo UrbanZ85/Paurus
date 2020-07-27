@@ -145,7 +145,7 @@ async save() {
       if (this.students !== undefined) {
         this.student.fiboId = await this.getNewId.getNewId();
       }
-      this.studSrv.createStudent(this.student);
+      setTimeout( () => this.studSrv.createStudent(this.student), 1000);
   }  else {
     /* let students;
     // tslint:disable-next-line:prefer-const
