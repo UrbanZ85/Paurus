@@ -131,11 +131,12 @@ onSubmit(value: string) {
 
 
 async save() {
-  let tmpCour: Courses[];
-  tmpCour = {...this.student.courses};
-  this.userform.patchValue(tmpCour);
+  /* let tmpCour: Courses[];
+  console.log(this.student) */
+  console.log(this.userform.value)
+  /* tmpCour = {...this.student.courses};
+  this.userform.patchValue(tmpCour); */
   this.student = {...this.userform.value};
-
 
   this.userform.reset();
   this.displayDialog = false;
@@ -145,7 +146,7 @@ async save() {
       if (this.students !== undefined) {
         this.student.fiboId = await this.getNewId.getNewId();
       }
-      setTimeout( () => this.studSrv.createStudent(this.student), 1000);
+      this.studSrv.createStudent(this.student);
   }  else {
     /* let students;
     // tslint:disable-next-line:prefer-const

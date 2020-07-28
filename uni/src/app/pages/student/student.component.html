@@ -90,7 +90,7 @@
     </p-footer>
 </p-dialog>
  -->
-<p-dialog header="Student Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true" appendTo="body" [style]="{ width: '500px'}" >  
+<p-dialog header="Student Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true" appendTo="body" [style]="{ width: '300px'}" >  
         <form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
             <div class="p-grid ui-fluid" *ngIf="student">
             <div class="p-col-4">
