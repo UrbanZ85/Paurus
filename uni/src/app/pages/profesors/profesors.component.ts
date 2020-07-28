@@ -35,7 +35,6 @@ export class ProfesorsComponent implements OnInit {
     /* this.studSrv.getStudents().then(data => this.students = data); */
 
     this.cols = [
-      { field: 'id', header: 'ID' },
       { field: 'name', header: 'Name' },
       { field: 'courses', header: 'Courses' },
   ];
@@ -57,9 +56,7 @@ export class ProfesorsComponent implements OnInit {
         return {
           id: e.payload.doc.id,
           // tslint:disable-next-line:no-string-literal
-          name: e.payload.doc.data()['name'],
-          // tslint:disable-next-line:no-string-literal
-          professor: e.payload.doc.data()['professor'],
+          name: e.payload.doc.data()['name']
         };
       });
     });

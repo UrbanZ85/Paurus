@@ -4,7 +4,7 @@ import { Professor } from './profesor';
 export interface Courses {
     id?: any;
     name?: string;
-    professor?: string;
+    professor?: string = "";
     students?: Student[];
     professors?: Professor[];
 }

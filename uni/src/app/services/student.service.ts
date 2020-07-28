@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
-import { query } from '@angular/animations';
 import { Student } from '../models/student';
-import { map, catchError, take, exhaustMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { AuthService } from '../core/auth/auth.service';
-import { TestBed } from '@angular/core/testing';
 
+
+// https://medium.com/@aaron_lu1/firebase-cloud-firestore-add-set-update-delete-get-data-6da566513b1b
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +14,7 @@ export class StudentService {
   constructor(private firestore: AngularFirestore, private http: HttpClient, private authService: AuthService) { }
 
 
-  createStudent(data) {
+  createStudent(data: Student) {
   /* data.courses2 = [];
   data.courses.forEach(element => {
        console.log(this.firestore.doc('Courses/' + element.id).ref);
@@ -40,8 +37,34 @@ export class StudentService {
         .then(res => {console.log('OK'); } , err => reject(console.log(err)))
         .catch(e => {console.log(e); });
 }); */
-console.log(data);
-this.firestore.collection('Students').add(data);
+console.log(typeof(data))
+
+/* return setTimeout(() => { */
+
+
+return this.firestore.collection('Students').add(data);
+/* }, 2000); */
+
+/* return setTimeout(this.firestore.collection('Students').doc().set({name: data.name,
+    last_name: data.last_name,
+    birthdate: data.birthdate,
+    studentNr: data.studentNr,
+    fiboId: data.fiboId,
+    courses: data.courses
+}); */
+/* return this.firestore.collection('Students').add(data); */
+
+/* const studentsCollection = this.firestore.collection<Student>('Students');
+ */
+
+/* return this.firestore.collection('Students').add(data).then(documentReference => {
+  console.log(`Added document with name '${documentReference.id}'`);
+}); */
+
+/* return studentsCollection.add(data); */
+
+/* console.log(data);
+return this.firestore.collection('Students').add(data); */
   }
 
   /* createStudent(data) {

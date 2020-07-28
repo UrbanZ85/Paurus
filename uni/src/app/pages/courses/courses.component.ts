@@ -35,7 +35,6 @@ export class CoursesComponent implements OnInit {
     /* this.studSrv.getStudents().then(data => this.students = data); */
 
     this.cols = [
-      { field: 'id', header: 'ID' },
       { field: 'name', header: 'Name' },
       { field: 'professors', header: 'Professors' },
       { field: 'students', header: 'Students' }

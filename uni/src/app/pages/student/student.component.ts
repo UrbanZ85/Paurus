@@ -103,8 +103,6 @@ export class StudentComponent implements OnInit {
           id: e.payload.doc.id,
           // tslint:disable-next-line:no-string-literal
           name: e.payload.doc.data()['name'],
-          // tslint:disable-next-line:no-string-literal
-          professor: e.payload.doc.data()['professor'],
         };
       });
     });
@@ -133,10 +131,11 @@ onSubmit(value: string) {
 async save() {
   /* let tmpCour: Courses[];
   console.log(this.student) */
-  console.log(this.userform.value)
+  // console.log(this.userform.value);
   /* tmpCour = {...this.student.courses};
   this.userform.patchValue(tmpCour); */
-  this.student = {...this.userform.value};
+  this.student = this.userform.value;
+  console.log(this.student);
 
   this.userform.reset();
   this.displayDialog = false;
@@ -146,7 +145,7 @@ async save() {
       if (this.students !== undefined) {
         this.student.fiboId = await this.getNewId.getNewId();
       }
-      this.studSrv.createStudent(this.student);
+      await this.studSrv.createStudent(this.student);
   }  else {
     /* let students;
     // tslint:disable-next-line:prefer-const
