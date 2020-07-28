@@ -15,22 +15,14 @@ export class GetNewIdService {
     fiboNumbers = [];
     fiboStart = 101;
 
-    studentsSubscribe: Subscription = new Subscription();
-
-    async getNewId() {
-        /* let newId: number;
-        let maxnum: number; */
-        /* await this.getStudents(); */
-        this.getStudents();
-
-
+    async getNewId(students: Student[]) {
+        this.students = students;
         let max;
-
         let currFibo;
 
         if (this.students && this.students.length > 0){
            max =  Math.max.apply(null,
-           this.students.map(item => item.fiboId === undefined ? this.fiboStart : item.fiboId.substring(0, 3)));
+           (await this.students).map(item => item.fiboId === undefined ? this.fiboStart : item.fiboId.substring(0, 3)));
 
            currFibo = Math.max.apply(null, this.students
             .filter(item => item.fiboId === undefined ? max : +item.fiboId.substring(0, 3) === max)
@@ -84,10 +76,11 @@ export class GetNewIdService {
         return this.fiboNumbers[nextIndex];
     }
 
-    getStudents(){
-        /* await this.stdSer.getStudents().then((data) => {
-             this.students = data;
-        });     */
+    // obsolate
+    /* async getStudents(){
+        // await this.stdSer.getStudents().then((data) => {
+         //    this.students = data;
+        //});
         this.studentsSubscribe = this.studSrv.getStudents().subscribe(data => {
             this.students = data.map(e => {
               return {
@@ -96,12 +89,7 @@ export class GetNewIdService {
               };
             });
           });
-    }
-
-    ngOnDestroy(): void {
-        // tslint:disable-next-line:no-unused-expression
-        this.studentsSubscribe.unsubscribe;
-    }
+    } */
 
     getFibonnaci(){
         let prevFibo = 1;

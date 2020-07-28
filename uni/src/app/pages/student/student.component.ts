@@ -129,13 +129,7 @@ onSubmit(value: string) {
 
 
 async save() {
-  /* let tmpCour: Courses[];
-  console.log(this.student) */
-  // console.log(this.userform.value);
-  /* tmpCour = {...this.student.courses};
-  this.userform.patchValue(tmpCour); */
   this.student = this.userform.value;
-  console.log(this.student);
 
   this.userform.reset();
   this.displayDialog = false;
@@ -143,7 +137,7 @@ async save() {
   if (this.newStudent){
 
       if (this.students !== undefined) {
-        this.student.fiboId = await this.getNewId.getNewId();
+        this.student.fiboId = await this.getNewId.getNewId(this.students);
       }
       await this.studSrv.createStudent(this.student);
   }  else {

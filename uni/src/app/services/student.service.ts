@@ -29,17 +29,16 @@ export class StudentService {
   console.log('bb');
   return test; */
 
-  /* console.log('aaa');
-  return new Promise<any>((resolve, reject) => {
-    this.firestore
-        .collection('Students')
-        .add(JSON.stringify(data))
-        .then(res => {console.log('OK'); } , err => reject(console.log(err)))
-        .catch(e => {console.log(e); });
-}); */
-console.log(typeof(data))
+    /* console.log('aaa');
+    return new Promise<any>((resolve, reject) => {
+      this.firestore
+          .collection('Students')
+          .add(JSON.stringify(data))
+          .then(res => {console.log('OK'); } , err => reject(console.log(err)))
+          .catch(e => {console.log(e); });
+  }); */
 
-/* return setTimeout(() => { */
+  /* return setTimeout(() => { */
 
 
 return this.firestore.collection('Students').add(data);
