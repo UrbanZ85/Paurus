@@ -6,8 +6,6 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { StudentComponent } from './pages/student/student.component';
-import { OverviewComponent } from './pages/overview/overview.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 
@@ -23,10 +21,8 @@ import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
-
-import { CoursesComponent } from './pages/courses/courses.component';
-import { ProfesorsComponent } from './pages/profesors/profesors.component';
 import { MultiSelectModule } from 'primeng/multiselect';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptorService } from './core/auth/auth-interceptor.service';
@@ -35,12 +31,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
-    StudentComponent,
-    OverviewComponent,
     NavbarComponent,
     HomeComponent,
-    CoursesComponent,
-    ProfesorsComponent
   ],
   imports: [
     BrowserModule,
