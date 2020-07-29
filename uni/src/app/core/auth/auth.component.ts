@@ -5,7 +5,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 
 import { AuthService, AuthResponseData } from './auth.service';
@@ -23,10 +23,12 @@ export class AuthComponent implements OnDestroy {
   @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
 
   private closeSub: Subscription;
+  private returnUrl;
 
   constructor(
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
     private componentFactoryResolver: ComponentFactoryResolver
   ) {}
 
@@ -53,9 +55,10 @@ export class AuthComponent implements OnDestroy {
 
     authObs.subscribe(
       resData => {
-        console.log(resData);
+        /* console.log(resData); */
         this.isLoading = false;
-        this.router.navigate(['/students']);
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.router.navigate([this.returnUrl]);
       },
       errorMessage => {
         console.log(errorMessage);
