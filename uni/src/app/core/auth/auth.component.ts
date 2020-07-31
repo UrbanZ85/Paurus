@@ -57,6 +57,7 @@ export class AuthComponent implements OnDestroy {
       resData => {
         /* console.log(resData); */
         this.isLoading = false;
+        // tslint:disable-next-line:no-string-literal
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
         this.router.navigate([this.returnUrl]);
       },

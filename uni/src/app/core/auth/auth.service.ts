@@ -49,8 +49,6 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  
-
   signup(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(

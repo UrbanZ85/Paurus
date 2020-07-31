@@ -10,12 +10,13 @@ import { AuthService } from '../auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
   public loggedIn: boolean;
+  public isCollapsed: boolean;
 
   constructor(
     private router: Router,
     private authservice: AuthService
 
-  ) { }
+  ) {this.isCollapsed = true; }
 
   ngOnInit() {
     this.authservice.authStatus.subscribe(value => this.loggedIn = value);
