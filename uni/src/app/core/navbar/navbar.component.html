@@ -1,26 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <ul ngbNav  class="nav-tabs">
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="">Home</a>
+<nav class="navbar navbar-expand-md navbar-light bg-info sticky-top">
+  <button class="navbar-toggler navbar-left" type="button" data-toggle="collapse" data-target="#navbarNav" 
+  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+  (click)="isCollapsed=!isCollapsed">
+  <span class="navbar-toggler-icon navbar-left"></span>
+</button>
+<a class="navbar-brand" href="">Student IS</a>
+  
+  <div class="collapse navbar-collapse" id="navbarNav" [ngbCollapse]="isCollapsed" >
+    <ul class="navbar-nav navbar-left">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="">Home</a>
       </li>
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="pages/overview">Overview</a>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="pages/overview" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Overview</a>
       </li>
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="pages/students">Students</a>
-    
+      <li class="nav-item">
+        <a class="nav-link" routerLink="pages/students" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Students</a>
       </li>
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="pages/profesors">Professors</a>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="pages/profesors" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Professors</a>
       </li>
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="pages/courses">Courses</a>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="pages/courses" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Courses</a>
       </li>
-    </ul>
-    <ul class="nav navbar-right">
-      <li class="navbar-right padding"><a  routerLink="auth" *ngIf="!loggedIn">Login</a>
-      <li class="navbar-right"><a  (click)="logOut($event)" *ngIf="loggedIn">Logout</a></li>
     </ul>
   </div>
+  <ul class="nav navbar-right">
+    <li class="navbar-right padding"><a  routerLink="auth" *ngIf="!loggedIn">Login</a>
+    <li class="navbar-right"><a  (click)="logOut($event)" *ngIf="loggedIn">Logout</a></li>
+  </ul>
 </nav>
