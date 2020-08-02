@@ -15,16 +15,16 @@
                 <tr [pSelectableRow]="rowData">
                     <td *ngFor="let col of columns">
                         <div *ngIf="col.field==='professors'">
-                            <div *ngFor="let p of rowData[col.field]">
+                            <div *ngFor="let p of rowData[col.field]" class="text-break">
                                 {{p.name}}
                             </div>
                         </div>
                         <div *ngIf="col.field==='students'">
-                            <div *ngFor="let s of rowData[col.field]">
+                            <div *ngFor="let s of rowData[col.field]" class="text-break">
                                 {{s.name}}
                             </div>
                         </div>
-                        <div *ngIf="col.field!=='professors'&&col.field!=='students'">{{rowData[col.field]}}</div>
+                        <div *ngIf="col.field!=='professors'&&col.field!=='students'" class="text-break">{{rowData[col.field]}}</div>
                     </td>
                 </tr>
             </ng-template>

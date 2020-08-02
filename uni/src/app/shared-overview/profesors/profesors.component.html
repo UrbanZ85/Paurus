@@ -14,8 +14,8 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr [pSelectableRow]="rowData">
                     <td *ngFor="let col of columns">
-                        <div *ngIf="col.field!=='courses'">{{rowData[col.field]}}</div>
-                        <div *ngIf="col.field==='courses'">
+                        <div *ngIf="col.field!=='courses'" class="text-break">{{rowData[col.field]}}</div>
+                        <div *ngIf="col.field==='courses'" class="text-break">
                             <div *ngFor="let c of rowData[col.field]">
                                {{c.name}}
                             </div>
