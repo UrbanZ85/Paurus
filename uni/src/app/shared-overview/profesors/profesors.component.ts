@@ -44,7 +44,9 @@ export class ProfesorsComponent implements OnInit {
       this.professors = data.map(e => {
         return {
           id: e.payload.doc.id,
+          // tslint:disable-next-line:no-string-literal
           name: e.payload.doc.data()['name'],
+          // tslint:disable-next-line:no-string-literal
           courses: e.payload.doc.data()['courses'],
         };
       });
@@ -65,6 +67,7 @@ export class ProfesorsComponent implements OnInit {
 ngOnDestroy(): void {
     // tslint:disable-next-line:no-unused-expression
     this.professorSubscribe.unsubscribe;
+    // tslint:disable-next-line:no-unused-expression
     this.courseSubscribe.unsubscribe;
 }
 
