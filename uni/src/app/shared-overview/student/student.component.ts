@@ -177,7 +177,9 @@ async save() {
     // tslint:disable-next-line:prefer-const
     let student = {};
     // tslint:disable-next-line:forin
-    for (let prop in s) {
+    for
+    // tslint:disable-next-line:prefer-const
+    (let prop in s) {
       student[prop] = s[prop];
     }
     return student;
